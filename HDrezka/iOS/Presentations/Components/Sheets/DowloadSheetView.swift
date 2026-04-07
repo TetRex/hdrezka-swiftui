@@ -471,8 +471,7 @@ struct DownloadSheetView: View {
         .onChange(of: details) {
             if let details, let acting = details.voiceActing {
                 withAnimation(.easeInOut) {
-                    selectedActing = if !isLoggedIn,
-                                        let position = selectPositions.first(where: { $0.id == details.movieId.id }),
+                    selectedActing = if let position = selectPositions.first(where: { $0.id == details.movieId.id }),
                                         let first = acting.filter({ isUserPremium != nil || !$0.isPremium }).first(where: { $0.translatorId == position.acting })
                     {
                         first
@@ -515,8 +514,7 @@ struct DownloadSheetView: View {
                                 withAnimation(.easeInOut) {
                                     self.seasons = seasons
 
-                                    selectedSeason = if !isLoggedIn,
-                                                        let position = selectPositions.first(where: { $0.id == selectedActing.voiceId }),
+                                    selectedSeason = if let position = selectPositions.first(where: { $0.id == selectedActing.voiceId }),
                                                         let first = seasons.first(where: { $0.seasonId == position.season })
                                     {
                                         first
@@ -578,8 +576,7 @@ struct DownloadSheetView: View {
                 selectedQuality = nil
                 movie = nil
 
-                selectedEpisode = if !isLoggedIn,
-                                     let position = selectPositions.first(where: { $0.id == selectedActing?.voiceId }),
+                selectedEpisode = if let position = selectPositions.first(where: { $0.id == selectedActing?.voiceId }),
                                      let first = selectedSeason?.episodes.first(where: { $0.episodeId == position.episode })
                 {
                     first
